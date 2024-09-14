@@ -8,6 +8,7 @@ defmodule PlugExperimentWeb.Router do
     plug :put_root_layout, {PlugExperimentWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug PlugExperimentWeb.Plugs.Ymn
   end
 
   pipeline :api do
