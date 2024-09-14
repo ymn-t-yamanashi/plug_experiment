@@ -18,14 +18,14 @@ defmodule PlugExperimentWeb.Plugs.Ymn do
       |> List.first()
       |> elem(1)
       |> IO.inspect()
-      |> os()
+      |> get_os_name()
       |> IO.inspect()
 
     conn
-    |> ipd_redirect(os)
+    |> redirect(os)
   end
 
-  defp ipd_redirect(conn, "iPadOS") do
+  defp redirect(conn, "iPadOS") do
     IO.inspect("redirect https://www.apple.com/jp/ipad/")
 
     conn
@@ -33,9 +33,9 @@ defmodule PlugExperimentWeb.Plugs.Ymn do
     |> halt()
   end
 
-  defp ipd_redirect(conn, _), do: conn
+  defp redirect(conn, _), do: conn
 
-  defp os(agent) do
+  defp get_os_name(agent) do
     cond do
       String.match?(agent, ~r/iPad/) -> "iPadOS"
       String.match?(agent, ~r/X11/) -> "Linux"
